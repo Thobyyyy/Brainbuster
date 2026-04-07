@@ -111,4 +111,5 @@ if __name__ == "__main__":
         if nochmal.lower() != "j":
             break
 
+    
     print("Danke fürs Spielen!")
