@@ -1,0 +1,23 @@
+name: Python Quiz CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest   # weil du Windows erwähnt hast
+
+    steps:
+      - name: 📥 Repo auschecken
+        uses: actions/checkout@v4
+
+      - name: 🐍 Python installieren
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: ▶️ Script ausführen (inkl. Test)
+        run: |
+          python Brainbuster.py
