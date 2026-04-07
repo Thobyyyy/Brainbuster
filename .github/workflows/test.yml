@@ -1,19 +1,27 @@
-name: Python Test
+name: Quiz Test Action
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
 
 jobs:
-  test:
+  run-quiz-test:
     runs-on: windows-latest
 
     steps:
-    - name: Code holen
-      uses: actions/checkout@v3
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
 
-    - name: Python installieren
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: 🐍 Python installieren
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Programm ausführen
-      run: python brainbuster.py
+      - name: ▶️ Script ausführen (Command)
+        env:
+          CI: "true"
+        run: |
+          echo Starte Test...
+          python Brainbuster.py
+          echo Fertig!

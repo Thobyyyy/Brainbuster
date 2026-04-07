@@ -100,17 +100,20 @@ def zeige_klassendiagramm():
 # -----------------------------
 # Hauptprogramm
 # -----------------------------
+
 if __name__ == "__main__":
     test_stelle_frage()
     zeige_klassendiagramm()
-    
-    while True:
-        spiele_quiz()
-        zeige_rangliste()
 
-        nochmal = input("\nNochmal spielen? (j/n): ")
-        if nochmal.lower() != "j":
-            break
+    # 👉 Nur lokal spielen, nicht in CI
+    import os
+    if os.getenv("CI") != "true":
+        while True:
+            spiele_quiz()
+            zeige_rangliste()
 
-    
-    print("Danke fürs Spielen!")
+            nochmal = input("\nNochmal spielen? (j/n): ")
+            if nochmal.lower() != "j":
+                break
+
+        print("Danke fürs Spielen!")
