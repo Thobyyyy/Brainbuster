@@ -23,5 +23,5 @@ jobs:
           CI: "true"
         run: |
           echo Starte Test...
-          python Brainbuster.py
+          python test.py
           echo Fertig!

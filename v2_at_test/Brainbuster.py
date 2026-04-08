@@ -20,27 +20,29 @@ def zeige_hilfe():
     print("\n--- Hilfe ---")
     print("Beantworte die Fragen.")
     print("Gib 'h' ein, um diese Hilfe zu sehen.")
-    print("Alles wird klein geschrieben verglichen.\n")
+    print("Alles wird klein geschrieben verglichen.")
+    print("Bei weiteren Fragen an den Programmierer wenden.\n")
 
 
 def stelle_frage(frage_objekt):
-    print("\nFrage:", frage_objekt["frage"])
-    eingabe = input("Deine Antwort: ").lower()
+    while True:
+        print("\nFrage:", frage_objekt["frage"])
+        eingabe = input("Deine Antwort: ").lower()
 
-    if eingabe == "h":
-        zeige_hilfe()
-        return stelle_frage(frage_objekt)
+        if eingabe == "h":
+            zeige_hilfe()
+            continue  # fragt nochmal, ohne Fehler
 
-    if eingabe == frage_objekt["antwort"]:
-        print("Richtig!")
-        return 1
-    else:
-        print("Falsch! Richtige Antwort:", frage_objekt["antwort"])
-        return 0
+        if eingabe == frage_objekt["antwort"]:
+            print("Richtig!")
+            return 1
+        else:
+            print("Falsch! Richtige Antwort:", frage_objekt["antwort"])
+            return 0
 
 
 def spiele_quiz():
-    print("Willkommen zum Quiz-Spiel!")
+    print("Willkommen zum Quiz-Spiel! | Bei Fragen 'h' in die Antwort eingeben")
     name = input("Dein Name: ")
 
     punkte = 0
@@ -73,7 +75,7 @@ def test_stelle_frage():
     
     # Simulierter Test (kein echtes input)
     assert test_frage["antwort"] == "ja"
-    print("Test erfolgreich!")
+    print("")
 
 
 # -----------------------------
@@ -101,12 +103,15 @@ def zeige_klassendiagramm():
 # Hauptprogramm
 # -----------------------------
 
+import os
+
 if __name__ == "__main__":
+    # Tests automatisch starten
+    os.system("python test.py")
+
     test_stelle_frage()
     zeige_klassendiagramm()
 
-    # 👉 Nur lokal spielen, nicht in CI
-    import os
     if os.getenv("CI") != "true":
         while True:
             spiele_quiz()
